@@ -24,4 +24,7 @@ export const FormInputText = ({ name, control, label }: FormInputProps) => {
           label={label}
           variant="outlined"
         />
+      )}
+    />
   );
+};
