@@ -36,7 +36,10 @@ export const FormInputMultiCheckbox: React.FC<FormInputProps> = ({
   }, [selectedItems]);
 
   return (
-    <FormControl size={"small"} variant={"outlined"}>
+    <FormControl
+      sx={{ border: '1px groove lightgrey', p: 1 }}
+      component={"fieldset"}
+    >
       <FormLabel component="legend">{label}</FormLabel>
       <div>
         {options.map((option: any) => {

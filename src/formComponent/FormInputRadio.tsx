@@ -1,4 +1,4 @@
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup } from "@mui/material";
 import React from "react";
 import { Controller } from "react-hook-form";
 import { FormInputProps } from "./FormInputProps";
@@ -17,7 +17,7 @@ const options = [
 export const FormInputRadio: React.FC<FormInputProps> = ({
   name,
   control,
-  label,
+  label
 }) => {
   const generateRadioOptions = () => {
     return options.map((singleOption) => (
@@ -30,21 +30,24 @@ export const FormInputRadio: React.FC<FormInputProps> = ({
   };
 
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">{label}</FormLabel>
-      <Controller
-        name={name}
-        control={control}
-        render={({
-          field: { onChange, value },
-          fieldState: { error },
-          formState,
-        }) => (
-          <RadioGroup value={value} onChange={onChange}>
+    <Controller
+      name={name}
+      control={control}
+      render={({
+        field: { onChange, value },
+        fieldState: { error }
+      }) => (
+        <FormControl
+          {...(error && { error: true })}
+          sx={{ border: '1px groove lightgrey', p: 1 }}
+          component="fieldset">
+          <FormLabel component="legend">{label}</FormLabel>
+          <RadioGroup row aria-label="label" name="row-radio-buttons-group" value={value} onChange={onChange}>
             {generateRadioOptions()}
           </RadioGroup>
-        )}
-      />
-    </FormControl>
+          <FormHelperText>{error ? error.message : null}</FormHelperText>
+        </FormControl>
+      )}
+    />
   );
 };
